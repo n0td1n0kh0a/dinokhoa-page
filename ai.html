@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>AI Assistant</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Ask AI Assistant</h1>
+    <p>Get answers to your questions powered by Gemini API!</p>
+    <input type="text" id="userInput" placeholder="Type your question here..." />
+    <button id="askButton">Ask Gemini</button>
+    <div id="response"></div>
+  </div>
+
+  <script type="module">
+    import { GoogleGenerativeAI } from "@google/generative-ai";
+
+    const API_KEY = "AIzaSyAf5ikjtY7jshCqJ1fKEKjGPUMpXPrss3U";
+    const genAI = new GoogleGenerativeAI(API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    document.getElementById('askButton').addEventListener('click', async () => {
+      const prompt = document.getElementById('userInput').value;
+      const responseElement = document.getElementById('response');
+
+      if (prompt) {
+        try {
+          const result = await model.generateContent(prompt);
+          const markdownResponse = result.response.text();
+          const htmlResponse = marked.parse(markdownResponse);
+          responseElement.innerHTML = htmlResponse;
+        } catch (error) {
+          responseElement.textContent = "Error generating response: " + error.message;
+        }
+      } else {
+        responseElement.textContent = "Please enter a question.";
+      }
+    });
+  </script>
+</body>
+
+</html>
