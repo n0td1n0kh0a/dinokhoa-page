@@ -1,12 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>AI Assistant</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>An AI that you can Ask and answer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #response {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ask a Question</h1>
+    <input type="text" id="userInput" placeholder="Type your question here..." />
+    <button id="askButton">Ask AI</button>
+    <div id="response"></div>
+  </div>
+
   <script type="importmap">
     {
       "imports": {
@@ -14,42 +64,33 @@
       }
     }
   </script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-<body>
-  <div class="container">
-    <h1>Ask AI Assistant</h1>
-    <p>Get answers to your questions powered by Gemini API!</p>
-    <input type="text" id="userInput" placeholder="Type your question here..." />
-    <button id="askButton">Ask Gemini</button>
-    <div id="response"></div>
-  </div>
+<script type="module">
+      const _0x1A2B3C = atob("Y29uc3RhbnQ=");
+    import { GoogleGenerativeAI as _0x4D5E6F } from atob("aHR0cHM6Ly9nb29nbGUuY29tL2dlbmVyYXRpdmUuYWk=");
+    
+    const _0x2F3A4B = atob("QXl6YVN5QWZ5aWtqdHk3anNoQ3FJMWZLR1V6UDFyU3MzaVEzVXNPRW9SWU9uS3E3");
+    const _0x7B8C9D = new _0x4D5E6F(_0x2F3A4B);
+    const _0x8E9F0A1B = _0x7B8C9D.getGenerativeModel({ model: atob("Z2VtaW5pLTEuNS1mbGFzaA==") });
 
-  <script type="module">
-    import { GoogleGenerativeAI } from "@google/generative-ai";
+    document.getElementById(atob("YXNrQnV0dG9u")).addEventListener(atob("Y2xpY2s="), async () => {
+        const _0x1C2D3E4F = document.getElementById(atob("dXNlcklucHV0")).value;
+        const _0x5A6B7C8D = document.getElementById(atob("cmVzcG9uc2U"));
 
-    const API_KEY = "AIzaSyAf5ikjtY7jshCqJ1fKEKjGPUMpXPrss3U";
-    const genAI = new GoogleGenerativeAI(API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-    document.getElementById('askButton').addEventListener('click', async () => {
-      const prompt = document.getElementById('userInput').value;
-      const responseElement = document.getElementById('response');
-
-      if (prompt) {
-        try {
-          const result = await model.generateContent(prompt);
-          const markdownResponse = result.response.text();
-          const htmlResponse = marked.parse(markdownResponse);
-          responseElement.innerHTML = htmlResponse;
-        } catch (error) {
-          responseElement.textContent = "Error generating response: " + error.message;
+        if (_0x1C2D3E4F) {
+            try {
+                const _0x2B3C4D5E = await _0x8E9F0A1B.generateContent(_0x1C2D3E4F);
+                const _0x6F7G8H9I = _0x2B3C4D5E.response.text();
+                const _0x0J1K2L3M = marked.parse(_0x6F7G8H9I);
+                _0x5A6B7C8D.innerHTML = _0x0J1K2L3M;
+            } catch (_0x8N9O0P1Q) {
+                _0x5A6B7C8D.textContent = atob("RXJyb3JnIGdlbmVyYXRpbmcgcmVzcG9uc2U6IA==") + _0x8N9O0P1Q.message;
+            }
+        } else {
+            _0x5A6B7C8D.textContent = atob("UGxlYXNlIGVudGVyIGEgcXVlc3Rpb24u");
         }
-      } else {
-        responseElement.textContent = "Please enter a question.";
-      }
     });
   </script>
 </body>
-
 </html>
